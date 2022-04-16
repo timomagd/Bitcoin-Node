@@ -1,0 +1,6 @@
+- name: 'Install Packages'
+  community.general.pacman:
+    update_cache: yes
+    name: "{{ item }}"
+    state: present
+  loop: "{{ packages }}"

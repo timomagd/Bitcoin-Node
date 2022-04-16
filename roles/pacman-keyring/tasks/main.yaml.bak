@@ -1,0 +1,3 @@
+- name: 'Initializing pacman keyring'
+  ansible.builtin.shell:
+    cmd: pacman-key --init && pacman-key --populate archlinuxarm

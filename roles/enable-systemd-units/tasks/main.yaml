@@ -1,0 +1,12 @@
+- name: 'Enable Tor service'
+  ansible.builtin.systemd:
+    name: tor
+    enabled: yes
+    state: started
+
+- name: 'Enable Bitcoin Deamon'
+  ansible.builtin.systemd:
+    name: bitcoind
+    enabled: yes
+    state: started
+

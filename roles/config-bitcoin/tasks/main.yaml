@@ -1,0 +1,7 @@
+- name: 'Configure Bitcoin'
+  ansible.builtin.copy:
+    src: '{{ bitcoin_conf_src }}'
+    dest: '{{ bitcoin_conf_dest }}'
+    owner: '{{ bitcoin_user }}'
+    group: '{{ bitcoin_group }}'
+    remote_src: yes

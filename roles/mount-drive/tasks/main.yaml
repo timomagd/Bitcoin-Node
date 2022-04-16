@@ -1,0 +1,7 @@
+- name: 'Mount external drive'
+  ansible.posix.mount:
+    boot: yes
+    path: /var/lib/bitcoind
+    src: UUID=15351db1-acfb-4cdb-935d-27779634ea26
+    state: mounted
+    fstype: ext4

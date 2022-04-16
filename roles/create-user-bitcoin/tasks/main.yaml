@@ -1,0 +1,16 @@
+- name: 'Create bitcoin Group'
+  ansible.builtin.group:
+    name: '{{ bitcoin_group }}'
+    state: present
+    system: no
+
+- name: 'Create bitcoin User'
+  ansible.builtin.user:
+    name: '{{ bitcoin_user }}'
+    group: '{{ bitcoin_group }}'
+    shell: '/bin/zsh'
+    home: '/home/bitcoin/'
+    create_home: yes
+    # Add a password to user 
+    #https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module
+    #password: '<passwd>'

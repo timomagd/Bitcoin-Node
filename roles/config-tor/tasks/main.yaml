@@ -1,0 +1,7 @@
+- name: 'Configure Tor'
+  ansible.builtin.copy:
+    src: '{{ tor_conf_src }}'
+    dest: '{{ tor_conf_dest }}'
+    owner: '{{ tor_user }}'
+    group: '{{ tor_group }}'
+    remote_src: yes

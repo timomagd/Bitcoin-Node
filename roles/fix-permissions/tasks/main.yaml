@@ -1,0 +1,19 @@
+# Fix Permissions
+- name: 'Change ownership in /var/lib/bitcoind/'
+  ansible.builtin.file:
+    path: /var/lib/bitcoind
+    recurse: yes
+    owner: bitcoin
+    group: bitcoin
+
+# https://lightning.readthedocs.io/TOR.html
+- name: 'Add user bitcoin in tor group'
+  ansible.builtin.user:
+    append: yes
+    groups: tor
+    name: bitcoin
+
+- name: 'Fix /etc/bitcoin perms'
+  ansible.builtin.file:
+    path: /etc/bitcoin/
+    mode: 0710
