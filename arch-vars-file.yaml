@@ -1,0 +1,33 @@
+---
+## Packages to install
+# Pacman
+- packages:
+    - git
+    - vim
+    - ufw
+    - fail2ban
+    - curl
+    - rsync
+    - tor
+    - bitcoin-cli
+    - bitcoin-daemon
+
+### Dotfiles
+# Repository
+- dotfiles_repo: 'https://github.com/timomagd/dotfiles.git'
+
+# Host dotfiles-repo directory
+- dotfiles_repo_dir: '/root/dotfiles/'
+
+# Tor Configuration
+- tor_conf_dest: '/etc/tor/torrc'
+- tor_conf_src: '{{ dotfiles_repo_dir }}tor/torrc'
+- tor_user: 'tor'
+- tor_group: 'tor'
+
+# Bitcoin Configuration
+- bitcoin_datadir: '/var/lib/bitcoind'
+- bitcoin_conf_dest: '/etc/bitcoin/bitcoin.conf'
+- bitcoin_conf_src: '{{ dotfiles_repo_dir }}bitcoin/bitcoin.conf.privacy.lopp'
+- bitcoin_user: bitcoin
+- bitcoin_group: bitcoin
