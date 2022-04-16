@@ -1,0 +1,16 @@
+---
+- hosts: all
+  gather_facts: no
+  vars_files: arch-vars-file.yaml
+  roles:
+    - pacman-keyring
+    - python
+    - upgrade-packages
+    - install-packages
+    - download-dotfiles-repo
+    - create-user-bitcoin
+    - config-bitcoin
+    - config-tor
+    - mount-drive
+    - fix-permissions
+    - enable-systemd-units
