@@ -11,6 +11,7 @@
     - tor
     - bitcoin-cli
     - bitcoin-daemon
+    - docker #Needs machine restart to work
 
 ### Dotfiles
 # Repository
