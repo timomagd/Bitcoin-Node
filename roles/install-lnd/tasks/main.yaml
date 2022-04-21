@@ -1,0 +1,33 @@
+- name: 'Create dir to download lnd to'
+  ansible.builtin.file:
+    path: '{{ lnd_download_dir }}'
+    state: directory
+
+- name: 'Download lnd binary'
+  ansible.builtin.get_url:
+    url: 'https://github.com/lightningnetwork/lnd/releases/download/{{ lnd_version }}/lnd-{{ lnd_release }}-{{ lnd_arch }}-{{ lnd_version }}.tar.gz'
+    dest: '{{ lnd_download_dir }}'
+
+- name: 'Download lnd signature'
+  ansible.builtin.get_url:
+    url: 'https://github.com/lightningnetwork/lnd/releases/download/{{ lnd_version }}/manifest-guggero-{{ lnd_version }}.sig'
+    dest: '{{ lnd_download_dir }}'
+
+- name: 'Download lnd checksum'
+  ansible.builtin.get_url:
+    url: 'https://github.com/lightningnetwork/lnd/releases/download/{{lnd_version }}/manifest-{{ lnd_version }}.txt'
+    dest: '{{ lnd_download_dir }}'
+
+- name: 'Add pupkey of LND dev'
+  ansible.builtin.shell:
+    cmd: 'curl https://keybase.io/guggero/pgp_keys.asc | gpg --import'
+
+- name: 'Untar lnd'
+  ansible.builtin.unarchive:
+    src: '{{ lnd_download_dir }}/lnd-{{ lnd_release }}-{{ lnd_arch }}-{{ lnd_version }}.tar.gz'
+    remote_src: yes
+    dest: '{{ lnd_download_dir }}'
+
+- name: 'Install lnd'
+  ansible.builtin.shell:
+    cmd: 'install -m 0755 -o root -g root -t /usr/local/bin {{ lnd_download_dir }}/lnd-{{ lnd_release }}-{{ lnd_arch }}-{{ lnd_version }}/*'
