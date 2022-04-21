@@ -10,3 +10,8 @@
     enabled: yes
     state: started
 
+- name: 'Enable LND Daemon'
+  ansible.builtin.systemd:
+    name: lnd
+    enabled: yes
+    state: started
