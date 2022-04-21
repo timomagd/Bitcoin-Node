@@ -1,0 +1,39 @@
+- name: 'Create lnd user'
+  ansible.builtin.user:
+    name: '{{ lnd_user }}'
+    groups: bitcoin,tor
+    home: '/home/lnd/'
+    create_home: yes
+
+- name: 'Create lnd data dir'
+  ansible.builtin.file:
+    path: '/var/lib/lnd/'
+    state: directory
+    recurse: yes
+    owner: '{{ lnd_user }}'
+    group: '{{ lnd_user }}'
+
+- name: 'Create lnd conf dir'
+  ansible.builtin.file:
+    path: '/etc/lnd/'
+    state: directory
+    recurse: yes
+    owner: '{{ lnd_user }}'
+    group: '{{ lnd_user }}'
+
+- name: 'Configure lnd'
+  ansible.builtin.copy:
+    src: '{{ lnd_conf_src }}'
+    dest: '{{ lnd_conf_dest }}'
+    owner: '{{ lnd_user }}'
+    group: '{{ lnd_group }}'
+    remote_src: yes
+
+- name: 'Create lnd systemd unit'
+  ansible.builtin.copy:
+    src: '{{ lnd_unit_src }}'
+    dest: '/usr/lib/systemd/system/lnd.service'
+    owner: root
+    group: root
+    mode: 0644
+    remote_src: yes
