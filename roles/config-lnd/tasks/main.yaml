@@ -7,7 +7,7 @@
 
 - name: 'Create lnd data dir'
   ansible.builtin.file:
-    path: '/var/lib/lnd/'
+    path: '{{ lnd_datadir }}'
     state: directory
     recurse: yes
     owner: '{{ lnd_user }}'
@@ -15,11 +15,17 @@
 
 - name: 'Create lnd conf dir'
   ansible.builtin.file:
-    path: '/etc/lnd/'
+    path: '{{ lnd_conf_dir }}'
     state: directory
     recurse: yes
     owner: '{{ lnd_user }}'
-    group: '{{ lnd_user }}'
+    group: '{{ lnd_group }}'
+
+- name: 'Create lnd.conf symlink'
+  ansible.builtin.file:
+    path: '{{ lnd_conf_dir }}/lnd.conf'
+    src: '{{ lnd_conf_dest }}'
+    state: link
 
 - name: 'Configure lnd'
   ansible.builtin.copy:

@@ -5,3 +5,17 @@
     owner: '{{ bitcoin_user }}'
     group: '{{ bitcoin_group }}'
     remote_src: yes
+
+- name: 'Create bitcoind conf dir'
+  ansible.builtin.file:
+    path: '{{ bitcoin_conf_dir }}'
+    state: directory
+    recurse: yes
+    owner: '{{ bitcoin_user }}'
+    group: '{{ bitcin_group }}'
+
+- name: 'Create bitcoin.conf symlink'
+  ansible.builtin.file:
+    path: '{{ bitcoin_conf_dir }}/bitcoin.conf'
+    src: '{{ bitcoin_conf_dest }}'
+    state: link
