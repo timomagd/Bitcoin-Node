@@ -6,6 +6,11 @@
     owner: bitcoin
     group: bitcoin
 
+- name: 'Change permissions of /var/lib/bitcoind/.cookie'
+  ansible.builtin.file:
+    path: /var/lib/bitcoind/.cookie
+    mode: 0740
+
 # https://lightning.readthedocs.io/TOR.html
 - name: 'Add user bitcoin in tor group'
   ansible.builtin.user:
