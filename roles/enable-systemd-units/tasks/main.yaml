@@ -1,3 +1,7 @@
+- name: 'Reload systemd'
+  ansible.builtin.systemd:
+    daemon_reload: yes
+
 - name: 'Enable Tor service'
   ansible.builtin.systemd:
     name: tor
