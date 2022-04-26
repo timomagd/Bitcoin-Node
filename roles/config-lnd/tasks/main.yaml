@@ -13,9 +13,17 @@
     owner: '{{ lnd_user }}'
     group: '{{ lnd_user }}'
 
+- name: 'Configure lnd'
+  ansible.builtin.copy:
+    src: '{{ lnd_conf_src }}'
+    dest: '{{ lnd_datadir }}/lnd.conf'
+    owner: '{{ lnd_user }}'
+    group: '{{ lnd_group }}'
+    remote_src: yes
+
 - name: 'Create lnd conf dir'
   ansible.builtin.file:
-    path: '{{ lnd_conf_dir }}'
+    path: '{{ lnd_conf_link }}'
     state: directory
     recurse: yes
     owner: '{{ lnd_user }}'
@@ -23,17 +31,9 @@
 
 - name: 'Create lnd.conf symlink'
   ansible.builtin.file:
-    path: '{{ lnd_conf_dir }}/lnd.conf'
-    src: '{{ lnd_conf_dest }}'
+    path: '{{ lnd_conf_link }}/lnd.conf'
+    src: '{{ lnd_datadir }}/lnd.conf'
     state: link
-
-- name: 'Configure lnd'
-  ansible.builtin.copy:
-    src: '{{ lnd_conf_src }}'
-    dest: '{{ lnd_conf_dest }}'
-    owner: '{{ lnd_user }}'
-    group: '{{ lnd_group }}'
-    remote_src: yes
 
 - name: 'Create lnd systemd unit'
   ansible.builtin.copy:
