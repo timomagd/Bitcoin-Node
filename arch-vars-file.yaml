@@ -28,8 +28,7 @@
 
 # Bitcoin Configuration
 - bitcoin_datadir: '/var/lib/bitcoind'
-- bitcoin_conf_dir: '/etc/bitcoind/'
-- bitcoin_conf_dest: '/var/lib/bitcoind/bitcoin.conf'
+- bitcoin_conf_link: '/etc/bitcoin/'
 - bitcoin_conf_src: '{{ dotfiles_repo_dir }}bitcoin/bitcoin.conf.privacy.lopp'
 - bitcoin_user: 'bitcoin'
 - bitcoin_group: 'bitcoin'
@@ -39,9 +38,8 @@
 - lnd_arch: 'armv7'
 - lnd_version: 'v0.14.3-beta'
 - lnd_download_dir: '/root/lnd/'
-- lnd_datadir: '/var/lib/lnd/'
-- lnd_conf_dir: '/etc/lnd/'
-- lnd_conf_dest: '/var/lib/lnd/lnd.conf'
+- lnd_datadir: '/var/lib/lnd'
+- lnd_conf_link: '/etc/lnd/'
 - lnd_conf_src: '{{ dotfiles_repo_dir }}lnd/lnd.conf'
 - lnd_unit_src: '{{ dotfiles_repo_dir }}/lnd/lnd.service' 
 - lnd_user: 'lnd'
