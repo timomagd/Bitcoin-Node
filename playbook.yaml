@@ -9,9 +9,11 @@
     - install-packages
     - download-dotfiles-repo
     - create-user-bitcoin
+    - create-user-lnd
+    - mount-drive
     - config-bitcoin
     - config-tor
-    - mount-drive
+    - install-lnd
+    - config-lnd
     - fix-permissions
-    - machine-reboot
     - enable-systemd-units
