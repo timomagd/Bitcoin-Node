@@ -1,10 +1,3 @@
-- name: 'Create lnd user'
-  ansible.builtin.user:
-    name: '{{ lnd_user }}'
-    groups: bitcoin,tor
-    home: '/home/lnd/'
-    create_home: yes
-
 - name: 'Create lnd data dir'
   ansible.builtin.file:
     path: '{{ lnd_datadir }}'

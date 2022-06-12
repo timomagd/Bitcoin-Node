@@ -1,0 +1,15 @@
+- name: 'Create lnd Group'
+  ansible.builtin.group:
+    name: '{{ lnd_group }}'
+    state: present
+    system: no
+
+- name: 'Create lnd User'
+  ansible.builtin.user:
+    name: '{{ lnd_user }}'
+    group: '{{ lnd_group }}'
+    shell: '/bin/zsh'
+    home: '/home/lnd/'
+    create_home: yes
+    #https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module
+    #password: '<passwd>'
