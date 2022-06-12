@@ -1,7 +1,7 @@
 - name: 'Configure Bitcoin'
   ansible.builtin.copy:
     src: '{{ bitcoin_conf_src }}'
-    dest: '{{ bitcoin_datadir }}'
+    dest: '{{ bitcoin_datadir }}/bitcoin.conf'
     owner: '{{ bitcoin_user }}'
     group: '{{ bitcoin_group }}'
     remote_src: yes
@@ -12,10 +12,10 @@
     state: directory
     recurse: yes
     owner: '{{ bitcoin_user }}'
-    group: '{{ bitcin_group }}'
+    group: '{{ bitcoin_group }}'
 
 - name: 'Create bitcoin.conf symlink'
   ansible.builtin.file:
-    path: '{{ bitcoin_conf_link }}/bitcoin.conf'
+    path: '{{ bitcoin_conf_link }}bitcoin.conf'
     src: '{{ bitcoin_datadir }}/bitcoin.conf'
     state: link
